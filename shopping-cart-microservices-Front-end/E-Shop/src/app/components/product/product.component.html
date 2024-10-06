@@ -1,0 +1,59 @@
+
+<div class="product-list container d-flex gap-2 mt-5">
+    <ng-container *ngFor="let product of productList ">
+        <div class="card bg-dark text-white">
+            <img [src]="product.img" class="card-img-top" alt="...">
+            <div class="card-body">
+              <h6 class="card-title">{{product.name}}</h6>
+              <p class="card-text">
+                <span style="color: orange; font-weight: 500;">Rs. {{product.price | number: '2.2'}}</span>
+              </p>
+              <p class="card-text d-flex justify-content-between align-items-center">Stock : {{product.quantity}} 
+                <span style="color: greenyellow; font-size: 12px;"><i class="fa-solid fa-circle" style="font-size: 9px;"></i> In Stock</span>
+              </p>
+              <div class="detail-buy-btn d-flex w-100 gap-2">
+                <a href="#" class="btn btn-primary w-100">Details</a>
+                <a href="#" class="btn btn-warning w-100" data-bs-toggle="offcanvas" 
+                data-bs-target="#offcanvasBottom" aria-controls="offcanvasBottom" (click)="payment(product.id)">Buy</a>
+              </div>
+            </div>
+        </div>
+    </ng-container>
+   
+</div>
+
+
+<div *ngIf="isClickedBuy" class="offcanvas offcanvas-bottom" tabindex="-1" id="offcanvasBottom" aria-labelledby="offcanvasBottomLabel">
+  <div class="offcanvas-header bg-dark text-white px-4">
+    <h5 class="offcanvas-title" id="offcanvasBottomLabel">Payment</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  </div>
+  <div class="offcanvas-body small d-flex align-items-center gap-5 px-4">
+    <div class="left-div">
+        <img [src]="selectedProduct.img" width="200px" alt="...">
+    </div>
+    <div class="middle-div">
+        <h5 class="card-title mb-3">{{selectedProduct.name}}</h5>
+        <div class="card-text">
+            <span style="color: orangered; font-weight: 500; font-size: 16px;">Rs. {{selectedProduct.price | number: '2.2'}}</span>
+            <p class="card-text d-flex">Stock : {{selectedProduct.quantity}} </p>   
+            <p class="card-text d-flex">{{selectedProduct.description}} </p>    
+        </div>  
+    </div>
+    <div class="right-div w-50">
+      <div class="quantity">
+        <h6 class="mb-3">Add Quantity</h6>
+        <button class="btn btn-dark btn-sm" style="width: 28px;" (click)="decrease()"> - </button>
+        <span class="mx-2">{{quantityCount}}</span>
+        <button class="btn btn-dark btn-sm" style="width: 28px;" (click)="increase()">+</button>
+        <div class="my-2">
+          <h6>Total Price : <span  style="color: orangered;">Rs. {{selectedProduct.price * quantityCount | number: '2.2'}}</span></h6>
+        </div>
+      </div>
+      <button class="btn btn-warning mt-3" style="width: 200px;" (click)="makeOrder()" [disabled]="quantityCount==0">Confirm Payment</button>
+    </div>
+  </div>
+</div>
+
+
+

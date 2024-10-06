@@ -1,0 +1,27 @@
+
+.card{
+    width: 13rem;
+}
+
+p{
+    margin-bottom: 10px;
+}
+.product-list{
+    flex-wrap: wrap;
+}
+
+.offcanvas{
+    height: 50vh !important;
+}
+
+@media screen and (max-width:767px) {
+    .card{
+        width: 47%;
+    }
+    .offcanvas-body{
+        flex-wrap: wrap;
+    }
+    .offcanvas{
+        height:80vh !important;
+    }
+}

@@ -1,0 +1,36 @@
+version: '4'
+services:
+  mongodb:
+    image: mongo:7.0.5
+    container_name: mongodb
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: password
+      MONGO_INITDB_DATABASE: micro2-product-service
+    volumes:
+      - ./data/mongodb:/data/db
+
+
+  mysql-order:
+    image: mysql:latest
+    container_name: mysql-order
+    environment:
+      MYSQL_ROOT_PASSWORD: mysql
+    ports:
+      - "3307:3306"
+    volumes:
+      - ./data/mysql-order:/var/lib/mysql
+
+  mysql-payment:
+    image: mysql:latest
+    container_name: mysql-payment
+    environment:
+      MYSQL_ROOT_PASSWORD: mysql
+    ports:
+      - "3308:3306"
+    volumes:
+      - ./data/mysql-payment:/var/lib/mysql
+
+
